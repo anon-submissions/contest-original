@@ -10,7 +10,7 @@
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # Student side autograding was added by Brad Miller, Nick Hay, and
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
-#type a coment or something
+#type a coment or something 
 
 from captureAgents import CaptureAgent
 import random, time, util
@@ -121,4 +121,4 @@ class InterceptAgent(CaptureAgent):
     #self.distancer.getDistance(self.position, )
 
     return random.choice(actions)
-#this comment should appear in the branch
+
