@@ -113,7 +113,8 @@ class InterceptAgent(CaptureAgent):
 
     for oponent in self.oponents:
       oponentPosition = self.getOponentsPositions(gameState)
-      print oponentPosition
+      if oponentPosition != None:
+        print oponentPosition
       #oponentDistance = self.distancer.getDistance(self.position, oponentPosition)
       #self.oponentsDistance.append(oponentDistance)
 
