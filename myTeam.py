@@ -80,6 +80,9 @@ class InterceptAgent(CaptureAgent):
     self.oponentsDistance = []
     self.position = None
     self.noisyDistances = None
+    self.mazeWidth = 0.0
+    self.mazeHeight = 0.0
+    (self.mazeWidth, self.mazeHeight) = gameState.getWalls().asList()[-1]
 
   def getOponentsPositions(self, gameState):
     oponentsPositions = []
@@ -90,6 +93,22 @@ class InterceptAgent(CaptureAgent):
       else:
         oponentsPositions.append(0)
     return oponentsPositions
+
+  """Noisy distances returns a list, here we try to convert it to a tuple"""
+  def convertNoisyToCoordinates(self):
+    noisyCoordinates = []
+    i = 0
+    while i < len(self.noisyDistances):
+      x = self.noisyDistances[i]
+      y = self.noisyDistances[i+1]
+      if self.red:
+        x = x + self.position[0]
+      noisyCoordinates.append((x, y))
+      i = i + 2
+    return noisyCoordinates
+
+  def calculateBestAction(self, noisyPositions):
+
 
   def chooseAction(self, gameState):
     """
@@ -102,21 +121,18 @@ class InterceptAgent(CaptureAgent):
     You should change this in your own agent.
     '''
     #Variable declaration
-    enemyDistances = []
 
     #Update position
     self.position = gameState.getAgentState(self.index).getPosition()
 
     self.noisyDistances = gameState.getAgentDistances()
 
-    print self.noisyDistances
+    noisyPositions = self.convertNoisyToCoordinates()
+    print noisyPositions
 
-    for oponent in self.oponents:
-      oponentPosition = self.getOponentsPositions(gameState)
-      print oponentPosition
-      #oponentDistance = self.distancer.getDistance(self.position, oponentPosition)
-      #self.oponentsDistance.append(oponentDistance)
+    bestAction = self.calculateBestAction(noisyPositions)
 
+    return bestAction
     #print self.oponentsDistance so far it is always blanck
     #self.distancer.getDistance(self.position, )
 
